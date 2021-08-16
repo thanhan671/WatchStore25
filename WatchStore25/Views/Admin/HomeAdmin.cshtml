@@ -1,0 +1,169 @@
+﻿@using WatchStore25.Models;
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/AdminLayout/LayoutAdmin.cshtml";
+    var Product = ViewBag.product;
+    var dem = ViewBag.dem;
+    var Customer = ViewBag.customer;
+    var demcus = ViewBag.demcus;
+    var Order = ViewBag.order;
+    var demorder = ViewBag.demorder;
+  }
+@Html.Partial("Event_")
+<main>
+
+    <div class="cards">
+
+        <div>
+            <div class="card-single">
+                <div>
+          <h1> @dem </h1>
+                    <span>Sản Phẩm</span>
+                </div>
+                <div>
+                    <span class="las la-clipboard-list"></span>
+                </div>
+
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="color-table-if" width="100%">
+                        <thead>
+                            <tr>
+                                <td>Mã Sản Phẩm </td>
+                                <td>Tên Sản Phẩm</td>
+                                <td>Số Lượng</td>
+                                <td>Giá</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Product)
+                            {
+                                if (item.idProduct < 5)
+                                {
+                                    <tr>
+                                        <td><span class="status pink"></span>WS @item.idProduct</td>
+                                        <td>@item.name</td>
+                                        <td>@item.inventory</td>
+                                        <td>@item.amount</td>
+                                        <td><button class="detail"><a class="text-light" href=@Url.Action("Edit", "PRODUCTs", new { id = item.idProduct })>Chi Tiết</a><span class="las la-arrow-right"></span></td>
+                                    </tr>
+                                }
+
+                            }
+                        
+                                <td class="card-header-seeall" colspan="4">
+                                    <button class="detail"><a href=@Url.Action( "ProductManager","Admin")>Xem Tất Cả</a></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+   
+
+        <div>
+            <div class="card-single">
+                <div>
+                    <h1>@demcus</h1>
+                    <span>Khách Hàng</span>
+                </div>
+                <div>
+                    <span class="las la-users"></span>
+                </div>
+
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="color-table-if" width="100%">
+                        <thead>
+                            <tr>
+                                <td>Mã Khách Hàng</td>
+                                <td>Họ Và Tên</td>
+                                <td>Số Điện Thoại</td>
+                                <td>Địa Chỉ</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var items in Customer)
+                            {
+                                if (items.idCustomer < 5)
+                                {
+                            <tr>
+                                <td><span class="status purple"></span> CT @items.idCustomer</td>
+                                <td>@items.name</td>
+                                <td>@items.phoneNumber</td>
+                                <td>@items.address</td>
+                                <td><button class="detail"><a class="text-light" href=@Url.Action("Details", "CUSTOMERs", new { id = items.idCustomer })>Chi Tiết</a></button></td>
+                            </tr>
+                                }
+
+                            }
+                            <tr>
+                                <td class="card-header-seeall" colspan="4">
+                                    <button class="detail"><a href=@Url.Action( "Index","CUSTOMERs")>Xem Tất Cả</a></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <div>
+            <div class="card-single">
+                <div>
+                    <h1>@demorder</h1>
+                    <span>Đơn Hàng</span>
+                </div>
+                <div>
+                    <span class="las la-shopping-bag"></span>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="color-table-if" width="100%">
+                        <thead>
+                            <tr>
+                                <td>Mã đơn hàng</td>
+                                <td>Sản phẩm</td>
+                                <td>Số Lượng</td>
+                                <td>Ngày đặt hàng</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var itemi in Order)
+                            {
+                                if (itemi.idDetailOrder < 92)
+                                {
+                            <tr>
+                                <td><span class="status pink"></span>OD @itemi.idDetailOrder</td>
+                                <td>@itemi.PRODUCT.name</td>
+                                <td>@itemi.totalProduct</td>
+                                <td>@itemi.ORDER_PRODUCT.startDate</td>
+                                <td><button class="detail"><a class="text-light" href=@Url.Action("Edit", "OrderAdmin", new { id = itemi.idDetailOrder })>Chi Tiết</a></button></td>
+                            </tr>
+                                }
+                            }
+                            <tr>
+                                <td class="card-header-seeall" colspan="4">
+                                    <button class="detail"><a href=@Url.Action( "Index","OrderAdmin")>Xem Tất Cả</a></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</main>
+
+
